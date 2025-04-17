@@ -27,7 +27,7 @@ namespace HR.Controllers
         }
 
 
-        [HttpPost("createEmployee")]
+        [HttpPost("CreateEmployee")]
         [Authorize(Policy = "Manager")]
         [Authorize(Policy = "EnableAddEmployees")]
         public async Task<IActionResult> CreateEmployee([FromBody] NewEmployeeRequest newEmployee)
@@ -112,7 +112,7 @@ namespace HR.Controllers
         }
 
 
-        [HttpPatch("{employeeId}")]
+        [HttpPatch("EditEmployee/{employeeId}")]
         [Authorize(Policy = "Admin")]
         public async Task<ActionResult<ServiceResponse<NewEmployeeRequest>>> EditEmployee([FromRoute] int employeeId, [FromBody] JsonPatchDocument<EditEmployeeRequest>  patchDoc)
         {
@@ -127,6 +127,34 @@ namespace HR.Controllers
                 await _employeeService.EditEmployee(patchDoc, employeeId, myId, companyId);
 
                 return NoContent();
+            }
+            catch (Exception ex)
+            {
+                var serviceResponse = new ServiceResponse<bool>(false, false, ex.Message, 0);
+                return BadRequest(serviceResponse);
+            }
+
+        }
+
+
+
+        [HttpPatch("UpdateProfilePicture/{employeeId}")]
+        [Authorize(Policy = "StaffMember")]
+        //public async Task<ActionResult<ServiceResponse<EmployeeDto>>> UpdateProfilePicture([FromRoute] int employeeId, [FromForm] IFormFile profilePicture)
+        public async Task<ActionResult<string>> UpdateProfilePicture([FromRoute] int employeeId, [FromForm] IFormFile profilePicture)
+        {
+            try
+            {
+                string clientJWT = Token.ExtractTokenFromRequestHeaders(HttpContext);
+                Token.ExtractClaimsFromToken(clientJWT, _configuration, out ClaimsPrincipal claims, out JwtSecurityToken jwtToken);
+
+                int myId = int.Parse(claims.FindFirst("id")!.Value);
+                int companyId = int.Parse(claims.FindFirst("companyId")!.Value);
+                int myRole = int.Parse(claims.FindFirst("userRole")!.Value);
+
+                string profilePicturePath = await _employeeService.UpdateProfilePicture(profilePicture, employeeId, myId, companyId, myRole);
+
+                return Ok(profilePicturePath);
             }
             catch (Exception ex)
             {

@@ -130,6 +130,7 @@ builder.Services.AddScoped<ContractRepo>();
 builder.Services.AddScoped<HierarchyRepo>();
 builder.Services.AddScoped<AbsenceRepo>();
 builder.Services.AddScoped<WorkingPatternRepo>();
+builder.Services.AddScoped<FileRepo>();
 
 // Scoperd Unit of work injections
 builder.Services.AddScoped<MainUOW>();

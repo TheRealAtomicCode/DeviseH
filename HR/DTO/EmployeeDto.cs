@@ -51,6 +51,10 @@
         public int? PermissionId { get; set; }
         public List<ManagerDto> Managers { get; set; } = new List<ManagerDto>();
 
+        public static implicit operator EmployeeDto(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class ManagerDto
@@ -81,6 +85,7 @@
         public DateOnly AnnualLeaveStartDate { get; set; }
         public List<ContractDtoMini> Contracts { get; set; } = new List<ContractDtoMini>();
     }
+
 
 
 }

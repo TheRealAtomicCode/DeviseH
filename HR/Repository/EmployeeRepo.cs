@@ -182,7 +182,15 @@ namespace HR.Repository
         }
 
 
+        public async Task<int> UpdateProfilePicturePathSaved(string imagePath, int employeeId, int companyId)
+        {
+            var affectedRows = await _context.Employees
+                .Where(e => e.Id == employeeId && e.CompanyId == companyId)
+                .ExecuteUpdateAsync(setters => setters
+                    .SetProperty(e => e.ProfilePicture, imagePath));
 
+            return affectedRows;
+        }
 
 
 

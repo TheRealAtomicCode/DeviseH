@@ -107,7 +107,28 @@ namespace HR.Services
         }
 
 
-       
+        public async Task<string> UpdateProfilePicture(IFormFile profilePicture, int employeeId, int myId, int companyId, int myRole)
+        {
+            EmployeeDto employeeDto = await _mainUOW.EmployeeRepo.GetEmployeeDtoById(employeeId, companyId);
+
+            if (myId != employeeDto.Id && myRole <= StaticRoles.StaffMember) throw new Exception("Insufficient permissions");
+
+            if (myId != employeeDto.Id && myRole == StaticRoles.Manager)
+            {
+                if (!employeeDto.Managers.Any(m => m.ManagerId == myId))
+                {
+                    throw new Exception("You are not authorized to access this employee's details.");
+                }
+            } 
+
+            string imagePath = await _mainUOW.FileRepo.UploadImage(profilePicture, employeeId, companyId);
+
+            await _mainUOW.EmployeeRepo.UpdateProfilePicturePathSaved(imagePath, employeeId, companyId);
+
+            return imagePath;
+        }
+
+
 
 
 
