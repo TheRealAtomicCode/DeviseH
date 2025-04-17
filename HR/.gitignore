@@ -44,3 +44,6 @@ Migrations/
 *.log
 *.cache
 *.vs/
+
+# all static uploads
+wwwroot/uploads
