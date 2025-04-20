@@ -107,10 +107,10 @@ const UsersPage = () => {
               <option>Design</option>
             </select>
             <div className="flex space-x-2">
-              <button className="p-2 bg-pink-500 text-white rounded flex-1">
+              <button className="p-2 bg-cyan-600 text-white rounded flex-1 border border-cyan-300">
                 Sort A-Z
               </button>
-              <button className="p-2 bg-pink-500 text-white rounded flex-1">
+              <button className="p-2 bg-cyan-600 text-white rounded flex-1 border border-cyan-300">
                 Sort Z-A
               </button>
             </div>

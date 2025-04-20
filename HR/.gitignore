@@ -46,4 +46,4 @@ Migrations/
 *.vs/
 
 # all static uploads
-wwwroot/uploads
+wwwroot/uploads/
