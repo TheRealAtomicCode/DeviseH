@@ -165,6 +165,6 @@ app.MapControllers();
 app.UseStaticFiles();
 
 // Serve the client application from the myclient folder
-app.MapFallbackToFile("Client/index.html");
+app.MapFallbackToFile("wwwroot/index.html");
 
 app.Run();

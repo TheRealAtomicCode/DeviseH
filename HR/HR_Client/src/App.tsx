@@ -61,7 +61,9 @@ const App = () => {
         navigate(pathname);
         setLoading(false);
       } else {
-        navigate('/login');
+        //* NOTE
+        //* DISABLED DUE TO INCORRECT ROUTES /404 forward to login page
+        // navigate('/login');
       }
     },
     onError: (error: Error) => {

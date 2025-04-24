@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { TUserCard } from '../../types/TUser';
+import endpoints from '../../APIs/endpoints';
 
 function UserCard({ user }: { user: TUserCard }) {
   return (
@@ -8,7 +9,7 @@ function UserCard({ user }: { user: TUserCard }) {
         {user.profilePicture ? (
           <img
             className="w-24 h-24 mb-4 rounded-full shadow-md ring-2 ring-cyan-400 dark:ring-cyan-500"
-            src={user.profilePicture}
+            src={`${endpoints.hrBackend}${user.profilePicture}`}
             alt={`${user.id}-${user.firstName}-${user.lastName}`}
           />
         ) : (
