@@ -113,11 +113,13 @@ namespace HR.Repository
                 .Select(e => new FoundEmployee
                 {
                     Id = e.Id,
-                    FullName = $"{e.FirstName} {e.LastName}",
+                    FirstName = e.FirstName,
+                    LastName = e.LastName,
                     Title = e.Title,
                     Email = e.Email,
                     UserRole = e.UserRole,
-                    AnnualLeaveStartDate = e.AnnualLeaveStartDate                    
+                    AnnualLeaveStartDate = e.AnnualLeaveStartDate,
+                    ProfilePicture = e.ProfilePicture
                 })
                 .ToListAsync();
 
