@@ -121,6 +121,8 @@ namespace HR.Repository
                     AnnualLeaveStartDate = e.AnnualLeaveStartDate,
                     ProfilePicture = e.ProfilePicture
                 })
+                .OrderBy(e => e.FirstName)
+                .ThenBy(e => e.LastName)
                 .ToListAsync();
 
             return employees;
