@@ -49,12 +49,10 @@
         public DateOnly? PassportExpirationDate { get; set; }
         public int UserRole { get; set; }
         public int? PermissionId { get; set; }
+        public string TeamName { get; set; } = string.Empty;
+        public int TeamId { get; set; }
         public List<ManagerDto> Managers { get; set; } = new List<ManagerDto>();
 
-        public static implicit operator EmployeeDto(string v)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public class ManagerDto
@@ -75,6 +73,8 @@
         public int UserRole { get; set; }
         public DateOnly AnnualLeaveStartDate { get; set; }
         public string? ProfilePicture { get; set; }
+        public string TeamName { get; set; } = string.Empty;
+        public int TeamId { get; set; }
     }
 
     public class EmployeeWithContractDto

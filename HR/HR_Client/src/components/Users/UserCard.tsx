@@ -1,31 +1,12 @@
 import { Link } from 'react-router-dom';
 import { TUserCard } from '../../types/TUser';
-import endpoints from '../../APIs/endpoints';
+import ProfilePicture from '../ProfilePicture';
 
 function UserCard({ user }: { user: TUserCard }) {
   return (
     <div className="w-full max-w-sm bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
       <div className="flex flex-col items-center p-6">
-        {user.profilePicture ? (
-          <img
-            className="w-24 h-24 mb-4 rounded-full shadow-md ring-2 ring-cyan-400 dark:ring-cyan-500"
-            src={`${endpoints.hrBackend}${user.profilePicture}`}
-            alt={`${user.id}-${user.firstName}-${user.lastName}`}
-          />
-        ) : (
-          <div
-            className="
-      w-24 h-24 mb-4 rounded-full shadow-md ring-2 ring-cyan-500 dark:ring-cyan-500 
-      bg-cyan-500 dark:bg-gray-800 flex items-center justify-center
-      text-white text-3xl font-semibold
-    "
-            aria-label={`${user.firstName} ${user.lastName} initials`}
-          >
-            {`${user.firstName.charAt(0).toUpperCase()}${user.lastName
-              .charAt(0)
-              .toUpperCase()}`}
-          </div>
-        )}
+        <ProfilePicture user={user} />
 
         {user.title && (
           <p className="text-xs uppercase tracking-widest text-cyan-600 dark:text-cyan-400 mb-1">
@@ -40,7 +21,7 @@ function UserCard({ user }: { user: TUserCard }) {
           {user.email}
         </p>
         <p className="text-sm font-medium text-cyan-600 dark:text-cyan-400 mt-1 text-center">
-          {user.department}
+          {user.teamName}
         </p>
         <Link
           to={`/users/${user.id}`}

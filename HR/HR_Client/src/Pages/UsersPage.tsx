@@ -5,57 +5,6 @@ import { useMutation } from '@tanstack/react-query';
 import { TServiceResponse } from '../types/TServiceResponse';
 import { getUsers } from '../APIs/employees/users';
 
-// const users: TUserCard[] = [
-//   {
-//     id: 1,
-//     name: 'Alice Johnson',
-//     email: 'alice@example.com',
-//     department: 'Engineering',
-//   },
-//   {
-//     id: 2,
-//     name: 'Bob Smith',
-//     email: 'bob@example.com',
-//     department: 'Marketing',
-//   },
-//   {
-//     id: 3,
-//     name: 'Charlie Rose',
-//     email: 'charlie@example.com',
-//     department: 'Design',
-//   },
-//   {
-//     id: 4,
-//     name: 'Diana Prince',
-//     email: 'diana@example.com',
-//     department: 'Engineering',
-//   },
-//   {
-//     id: 5,
-//     name: 'Ethan Hunt',
-//     email: 'ethan@example.com',
-//     department: 'Marketing',
-//   },
-//   {
-//     id: 6,
-//     name: 'Fiona Gallagher',
-//     email: 'fiona@example.com',
-//     department: 'Design',
-//   },
-//   {
-//     id: 7,
-//     name: 'George Costanza',
-//     email: 'george@example.com',
-//     department: 'Engineering',
-//   },
-//   {
-//     id: 8,
-//     name: 'Hannah Montana',
-//     email: 'hannah@example.com',
-//     department: 'Marketing',
-//   },
-// ];
-
 const UsersPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [users, setUsers] = useState<TUserCard[]>([]);

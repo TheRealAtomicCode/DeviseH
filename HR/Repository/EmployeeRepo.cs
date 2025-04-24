@@ -64,6 +64,8 @@ namespace HR.Repository
                                          PassportExpirationDate = e.PassportExpirationDate,
                                          UserRole = e.UserRole,
                                          PermissionId = e.PermissionId,
+                                         TeamName = "Team Devise",
+                                         TeamId = 1,
                                          Managers = new List<ManagerDto>()
                                      }).FirstOrDefaultAsync();
 
@@ -119,7 +121,9 @@ namespace HR.Repository
                     Email = e.Email,
                     UserRole = e.UserRole,
                     AnnualLeaveStartDate = e.AnnualLeaveStartDate,
-                    ProfilePicture = e.ProfilePicture
+                    ProfilePicture = e.ProfilePicture,
+                    TeamName = "",
+                    TeamId = 1,
                 })
                 .OrderBy(e => e.FirstName)
                 .ThenBy(e => e.LastName)
