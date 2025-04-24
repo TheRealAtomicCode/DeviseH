@@ -1,124 +1,173 @@
 import { FC, useContext } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import { FaRegClock } from 'react-icons/fa';
 import { IoHomeOutline } from 'react-icons/io5';
 import { PiUsersThreeLight } from 'react-icons/pi';
 import { IoCalendarOutline } from 'react-icons/io5';
 import { TiFolderOpen } from 'react-icons/ti';
 import { GoGear } from 'react-icons/go';
-import { BiJoystickAlt } from 'react-icons/bi'; // For the plus icon
-import { GiHamburgerMenu } from 'react-icons/gi'; // For the burger menu
-import { Link } from 'react-router-dom';
+import { BiJoystickAlt } from 'react-icons/bi';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import { UserContext } from '../../context/AppContext';
 
 type TSideBarIconProps = {
   icon: JSX.Element;
   title?: string;
+  active?: boolean;
 };
 
-function SideNav() {
+const SideNav: FC = () => {
   const { id } = useContext(UserContext);
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  // helper to check active route
+  const isActive = (path: string) => currentPath === path;
 
   return (
     <div>
       {/* Sidebar for larger screens */}
       <div className="side-nav hidden sm:flex fixed top-0 left-0 h-screen w-16 m-0 flex-col bg-gray-950 text-white shadow-lg overflow-y-auto overflow-x-hidden scrollbar-hidden">
-        <i>
-          <Link to={'/users/' + id}>
-            <div className="cursor-pointer w-14 h-14 mt-4 rounded-full border border-white items-center justify-center mx-auto"></div>
-          </Link>
-        </i>
-        <i className="mt-16">
-          <Link to="/home">
-            <MdSideBarIcon icon={<IoHomeOutline size="28" />} title={'Home'} />
-          </Link>
-        </i>
+        <Link to={`/users/${id}`}>
+          <div
+            className={`cursor-pointer w-14 h-14 mt-4 rounded-full border border-white mx-auto flex items-center justify-center
+              ${
+                currentPath.startsWith(`/users/${id}`)
+                  ? 'ring-2 ring-pink-500'
+                  : ''
+              }`}
+          />
+        </Link>
 
-        <i>
+        <div className="mt-16">
+          <Link to="/home">
+            <MdSideBarIcon
+              icon={<IoHomeOutline size={28} />}
+              title="Home"
+              active={isActive('/home')}
+            />
+          </Link>
+        </div>
+
+        <div>
           <Link to="/users">
             <MdSideBarIcon
-              icon={<PiUsersThreeLight size="28" />}
-              title={'Users'}
+              icon={<PiUsersThreeLight size={28} />}
+              title="Users"
+              active={isActive('/users')}
             />
           </Link>
-        </i>
-        <i>
+        </div>
+
+        <div>
           <Link to="/calendar">
             <MdSideBarIcon
-              icon={<IoCalendarOutline size="28" />}
-              title={'Calendar'}
+              icon={<IoCalendarOutline size={28} />}
+              title="Calendar"
+              active={isActive('/calendar')}
             />
           </Link>
-        </i>
-        <i>
-          <Link to="/rotas">
-            <MdSideBarIcon icon={<FaRegClock size="28" />} title={'Rotas'} />
-          </Link>
-        </i>
+        </div>
 
-        <i>
+        <div>
+          <Link to="/rotas">
+            <MdSideBarIcon
+              icon={<FaRegClock size={28} />}
+              title="Rotas"
+              active={isActive('/rotas')}
+            />
+          </Link>
+        </div>
+
+        <div>
           <Link to="/files">
-            <MdSideBarIcon icon={<TiFolderOpen size="28" />} title={'Files'} />
+            <MdSideBarIcon
+              icon={<TiFolderOpen size={28} />}
+              title="Files"
+              active={isActive('/files')}
+            />
           </Link>
-        </i>
-        <i className="mt-auto mb-6">
+        </div>
+
+        <div className="mt-auto mb-6">
           <Link to="/settings">
-            <MdSideBarIcon icon={<GoGear size="28" />} />
+            <MdSideBarIcon
+              icon={<GoGear size={28} />}
+              title="Settings"
+              active={isActive('/settings')}
+            />
           </Link>
-        </i>
+        </div>
       </div>
 
       {/* Bottom bar for mobile screens */}
       <div className="sm:hidden fixed bottom-0 left-0 w-full bg-gray-950 text-white flex justify-between items-center p-2">
         <Link to="/home">
-          <SmSideBarIcon icon={<IoHomeOutline size="28" />} />
+          <SmSideBarIcon
+            icon={<IoHomeOutline size={28} />}
+            active={isActive('/home')}
+          />
         </Link>
         <Link to="/rotas">
-          <SmSideBarIcon icon={<FaRegClock size="28" />} />
+          <SmSideBarIcon
+            icon={<FaRegClock size={28} />}
+            active={isActive('/rotas')}
+          />
         </Link>
         <Link to="/home">
-          <SmSideBarIcon icon={<BiJoystickAlt size="28" />} />
+          <SmSideBarIcon icon={<BiJoystickAlt size={28} />} />
         </Link>
         <Link to="/calendar">
-          <SmSideBarIcon icon={<IoCalendarOutline size="28" />} />
+          <SmSideBarIcon
+            icon={<IoCalendarOutline size={28} />}
+            active={isActive('/calendar')}
+          />
         </Link>
         <Link to="/home">
-          <SmSideBarIcon icon={<GiHamburgerMenu size="28" />} />
+          <SmSideBarIcon icon={<GiHamburgerMenu size={28} />} />
         </Link>
       </div>
     </div>
   );
-}
-
-const MdSideBarIcon: FC<TSideBarIconProps> = ({ icon, title }) => {
-  return (
-    <div className=" cursor-pointer group">
-      <div className="hover:bg-pink-500 relative flex items-center justify-center h-12 w-12 mt-2 mb-[2px] mx-auto bg-gray-900 rounded-lg group-hover:rounded-3xl transition-all duration-200">
-        {icon}
-      </div>
-      {/* Hide text on small screens */}
-      {title && (
-        <p className="mx-auto text-white text-[10px] mt-1 group-hover:text-pink-500 text-center hidden sm:block">
-          {title}
-        </p>
-      )}
-    </div>
-  );
 };
 
-const SmSideBarIcon: FC<TSideBarIconProps> = ({ icon, title }) => {
-  return (
-    <div className="hover:text-pink-500 cursor-pointer group">
-      <div className="relative flex items-center justify-center h-8 w-12  mb-[2px] mx-auto  rounded-lg group-hover:rounded-3xl transition-all duration-200">
-        {icon}
-      </div>
-      {/* Hide text on small screens */}
-      {title && (
-        <p className="mx-auto text-white text-xs mt-1 group-hover:text-pink-500 text-center hidden sm:block">
-          {title}
-        </p>
-      )}
+const MdSideBarIcon: FC<TSideBarIconProps> = ({ icon, title, active }) => (
+  <div className="cursor-pointer group text-center">
+    <div
+      className={`relative flex items-center justify-center h-12 w-12 mt-2 mb-[2px] mx-auto rounded-lg transition-all duration-200
+        ${
+          active
+            ? 'bg-pink-500 rounded-3xl'
+            : 'bg-gray-900 hover:bg-pink-500 hover:rounded-3xl'
+        }`}
+    >
+      {icon}
     </div>
-  );
-};
+    {title && (
+      <p
+        className={`mx-auto text-white text-[10px] mt-1 group-hover:text-pink-500 hidden sm:block duration-200 ${
+          active ? 'text-pink-500' : ''
+        }`}
+      >
+        {title}
+      </p>
+    )}
+  </div>
+);
+
+const SmSideBarIcon: FC<TSideBarIconProps> = ({ icon, active }) => (
+  <div
+    className={`cursor-pointer group flex flex-col items-center justify-center transition-all duration-200
+      ${
+        active
+          ? 'text-pink-500 rounded-3xl'
+          : 'hover:text-pink-500 hover:rounded-3xl'
+      }`}
+  >
+    <div className="relative flex items-center justify-center h-8 w-12 mb-[2px] mx-auto">
+      {icon}
+    </div>
+  </div>
+);
 
 export default SideNav;
