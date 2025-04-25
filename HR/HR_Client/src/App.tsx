@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import AppRoutes from './Router/AppRouter';
 import { useMutation } from '@tanstack/react-query';
 import { TServiceResponse } from './types/TServiceResponse';
-import { refresh, IRefreshData, TRefreshRequest } from './APIs/auth/refresh';
+import { refresh, IRefreshData, TRefreshRequest } from './APIs/Auth/refresh';
 import { getCookie, setCookie } from './utils/cookies';
 import { UserContext } from './context/AppContext';
 

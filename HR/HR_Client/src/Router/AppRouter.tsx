@@ -1,15 +1,15 @@
 import { Route, Routes } from 'react-router-dom';
-import HomePage from '../pages/HomePage';
-import LoginPage from '../pages/LoginPage';
-import NotFoundPage from '../pages/NotFoundPage';
-import AuthenticatedLayout from '../layouts/AuthenticatedLayout';
-import UsersPage from '../pages/UsersPage';
-import UserPage from '../pages/UserPage';
-import CalendarPage from '../pages/CalendarPage';
-import RotasPage from '../pages/RotasPage';
-import RotaPage from '../pages/RotaPage';
-import FilesPage from '../pages/FilesPage';
-import SettingsPage from '../pages/SettingsPage';
+import HomePage from '../Pages/HomePage';
+import LoginPage from '../Pages/LoginPage';
+import NotFoundPage from '../Pages/NotFoundPage';
+import AuthenticatedLayout from '../Layouts/AuthenticatedLayout';
+import UsersPage from '../Pages/UsersPage';
+import UserPage from '../Pages/UserPage';
+import CalendarPage from '../Pages/CalendarPage';
+import RotasPage from '../Pages/RotasPage';
+import RotaPage from '../Pages/RotaPage';
+import FilesPage from '../Pages/FilesPage';
+import SettingsPage from '../Pages/SettingsPage';
 
 // Define the props
 interface AppRoutesProps {

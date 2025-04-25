@@ -6,7 +6,7 @@ function UserCard({ user }: { user: TUserCard }) {
   return (
     <div className="w-full max-w-sm bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
       <div className="flex flex-col items-center p-6">
-        <ProfilePicture user={user} />
+        <ProfilePicture user={user} size="w-[6rem] h-[6rem]" />
 
         {user.title && (
           <p className="text-xs uppercase tracking-widest text-cyan-600 dark:text-cyan-400 mb-1">

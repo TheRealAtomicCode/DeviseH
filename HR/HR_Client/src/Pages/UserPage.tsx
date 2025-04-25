@@ -6,7 +6,7 @@ import { TServiceResponse } from '../types/TServiceResponse';
 import { TUser } from '../types/TUser';
 import ProfilePicture from '../components/ProfilePicture';
 
-const tabs = ['Details', 'Contracts', 'Documents', 'Absences'] as const;
+const tabs = ['Absences', 'Contracts', 'Details', 'Documents'] as const;
 
 type Tab = (typeof tabs)[number];
 
@@ -38,7 +38,7 @@ const UserPage: React.FC = () => {
         <div className="">
           <div className="flex flex-col md:flex-row md:items-center gap-6 border-b pb-4 mb-6 mx-20">
             <div>
-              <ProfilePicture user={user} size={36} />
+              <ProfilePicture user={user} size="w-[10rem] h-[10rem]" />
             </div>
 
             <div>
@@ -79,6 +79,18 @@ const UserPage: React.FC = () => {
 
         {/* Content */}
         <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl shadow-inner">
+        {activeTab === 'Absences' && (
+            <div>
+              <h3 className="text-xl font-semibold mb-2">Absence Records</h3>
+              <p>No absence records available.</p>
+            </div>
+          )}
+          {activeTab === 'Contracts' && (
+            <div>
+              <h3 className="text-xl font-semibold mb-2">Contracts</h3>
+              <p>No contract data available.</p>
+            </div>
+          )}
           {activeTab === 'Details' && (
             <div>
               <h3 className="text-xl font-semibold mb-2">Employee Overview</h3>
@@ -98,24 +110,14 @@ const UserPage: React.FC = () => {
               </p>
             </div>
           )}
-          {activeTab === 'Contracts' && (
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Contracts</h3>
-              <p>No contract data available.</p>
-            </div>
-          )}
+          
           {activeTab === 'Documents' && (
             <div>
               <h3 className="text-xl font-semibold mb-2">Documents</h3>
               <p>No documents available.</p>
             </div>
           )}
-          {activeTab === 'Absences' && (
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Absence Records</h3>
-              <p>No absence records available.</p>
-            </div>
-          )}
+          
         </div>
       </div>
     </div>
