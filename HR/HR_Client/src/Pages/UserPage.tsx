@@ -5,6 +5,7 @@ import { getUserById } from '../APIs/employees/users';
 import { TServiceResponse } from '../types/TServiceResponse';
 import { TUser } from '../types/TUser';
 import ProfilePicture from '../components/ProfilePicture';
+import ContractSection from '../components/Users/Profile/ContractSection';
 
 const tabs = ['Absences', 'Contracts', 'Details', 'Documents'] as const;
 
@@ -86,10 +87,7 @@ const UserPage: React.FC = () => {
             </div>
           )}
           {activeTab === 'Contracts' && (
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Contracts</h3>
-              <p>No contract data available.</p>
-            </div>
+           <ContractSection />
           )}
           {activeTab === 'Details' && (
             <div>
