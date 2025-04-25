@@ -6,6 +6,8 @@ import { TServiceResponse } from '../types/TServiceResponse';
 import { TUser } from '../types/TUser';
 import ProfilePicture from '../components/ProfilePicture';
 import ContractSection from '../components/Users/Profile/ContractSection';
+import { TLeaveData } from '../types/TContract';
+import { getLeaveYear } from '../APIs/contracts';
 
 const tabs = ['Absences', 'Contracts', 'Details', 'Documents'] as const;
 
@@ -16,19 +18,30 @@ const UserPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>(tabs[0]);
 
   const {
-    data: response,
-    isLoading,
-    error,
+    data: userResponse,
+    isLoading: userIsLoading,
+    error: userError,
   } = useQuery<TServiceResponse<TUser>, Error>({
     queryKey: ['userProfile', userId],
     queryFn: () => getUserById(Number(userId)),
     enabled: Boolean(userId),
   });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div className="text-red-500">Error: {error.message}</div>;
+  const {
+    data: leaveYearResponse,
+    isLoading: leaveYearIsLoading,
+    error: leaveYearError,
+  } = useQuery<TServiceResponse<TLeaveData>, Error>({
+    queryKey: ['leaveYear', userId],
+    queryFn: () => getLeaveYear(Number(userId), '2024-01-01'),
+    enabled: Boolean(userId),
+  });
 
-  const user = response?.data;
+  if (userIsLoading) return <div>Loading...</div>;
+  if (userError)
+    return <div className="text-red-500">Error: {userError.message}</div>;
+
+  const user = userResponse?.data;
   if (!user) return <div>No user found.</div>;
 
   return (
@@ -85,7 +98,9 @@ const UserPage: React.FC = () => {
               <p>No absence records available.</p>
             </div>
           )}
-          {activeTab === 'Contracts' && <ContractSection />}
+          {activeTab === 'Contracts' && (
+            <ContractSection leaveYear={leaveYearResponse?.data} />
+          )}
           {activeTab === 'Details' && (
             <div>
               <h3 className="text-xl font-semibold mb-2">Employee Overview</h3>

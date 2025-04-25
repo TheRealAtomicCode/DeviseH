@@ -6,6 +6,10 @@ meta {
 
 patch {
   url: {{hr-url}}/api/Employee/UpdateProfilePicture/1
-  body: none
+  body: multipartForm
   auth: inherit
+}
+
+body:multipart-form {
+  ProfilePicture: @file(/home/qader/Downloads/lq0jdyhj8po01.webp)
 }

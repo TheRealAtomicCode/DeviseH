@@ -20,8 +20,6 @@ export async function getLeaveYear(
 
   const data = await response.json();
 
-  console.log(data);
-
   if (!data && !data?.message) throw new Error('Failed to get users');
 
   return data;

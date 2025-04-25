@@ -1,3 +1,3 @@
 export default {
-  hrBackend: 'https://localhost:7017',
+  hrBackend: 'http://localhost:5065',
 };
