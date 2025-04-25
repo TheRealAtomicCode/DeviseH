@@ -38,7 +38,7 @@ const UserPage: React.FC = () => {
         <div className="">
           <div className="flex flex-col md:flex-row md:items-center gap-6 border-b pb-4 mb-6 mx-20">
             <div>
-              <ProfilePicture user={user} size="w-[10rem] h-[10rem]"  />
+              <ProfilePicture user={user} size="w-[10rem] h-[10rem]" />
             </div>
 
             <div>
