@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getUserById } from '../APIs/employees/users';
+import { getUserById } from '../APIs/employees';
 import { TServiceResponse } from '../types/TServiceResponse';
 import { TUser } from '../types/TUser';
 import ProfilePicture from '../components/ProfilePicture';
@@ -13,7 +13,6 @@ type Tab = (typeof tabs)[number];
 
 const UserPage: React.FC = () => {
   const { userId } = useParams<{ userId: string }>();
-  console.log(userId);
   const [activeTab, setActiveTab] = useState<Tab>(tabs[0]);
 
   const {
@@ -80,15 +79,13 @@ const UserPage: React.FC = () => {
 
         {/* Content */}
         <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl shadow-inner">
-        {activeTab === 'Absences' && (
+          {activeTab === 'Absences' && (
             <div>
               <h3 className="text-xl font-semibold mb-2">Absence Records</h3>
               <p>No absence records available.</p>
             </div>
           )}
-          {activeTab === 'Contracts' && (
-           <ContractSection />
-          )}
+          {activeTab === 'Contracts' && <ContractSection />}
           {activeTab === 'Details' && (
             <div>
               <h3 className="text-xl font-semibold mb-2">Employee Overview</h3>
@@ -108,14 +105,13 @@ const UserPage: React.FC = () => {
               </p>
             </div>
           )}
-          
+
           {activeTab === 'Documents' && (
             <div>
               <h3 className="text-xl font-semibold mb-2">Documents</h3>
               <p>No documents available.</p>
             </div>
           )}
-          
         </div>
       </div>
     </div>

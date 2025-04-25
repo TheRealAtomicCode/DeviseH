@@ -3,7 +3,7 @@ import UserCard from '../components/Users/UserCard';
 import { TUserCard } from '../types/TUser';
 import { useMutation } from '@tanstack/react-query';
 import { TServiceResponse } from '../types/TServiceResponse';
-import { getUsers } from '../APIs/employees/users';
+import { getUsers } from '../APIs/employees';
 
 const UsersPage = () => {
   const [errorMessage, setErrorMessage] = useState('');

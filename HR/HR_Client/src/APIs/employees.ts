@@ -1,7 +1,7 @@
-import { TServiceResponse } from '../../types/TServiceResponse';
-import { TUserCard, TUser } from '../../types/TUser';
-import { getCookie } from '../../utils/cookies';
-import endpoints from '../endpoints';
+import { TServiceResponse } from '../types/TServiceResponse';
+import { TUserCard, TUser } from '../types/TUser';
+import { getCookie } from '../utils/cookies';
+import endpoints from './endpoints';
 
 export async function getUsers(
   searchTerm: string,
